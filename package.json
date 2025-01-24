@@ -1,0 +1,20 @@
+{
+  "name": "s74_just_journal",
+  "version": "1.0.0",
+  "description": "**Just Journal** is a simple and user-friendly journaling app designed to promote self-reflection. The app enforces a **500-word limit** for each journal entry, encouraging users to focus their thoughts, practice brevity, and make concise reflections.",
+  "homepage": "https://github.com/kalviumcommunity/S74_JUST_JOURNAL#readme",
+  "bugs": {
+    "url": "https://github.com/kalviumcommunity/S74_JUST_JOURNAL/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalviumcommunity/S74_JUST_JOURNAL.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
