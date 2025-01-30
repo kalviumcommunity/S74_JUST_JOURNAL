@@ -20,3 +20,6 @@ From a development perspective, this project is an excellent opportunity to:
 - Build a full-stack application.  
 - Learn more about integrating React with MongoDB.  
 - Create a practical and impactful tool for everyday use.
+
+
+In the assignment of render deployment I have learnt how to use the website render.com to deploy the project it was easy and simple and can be learnt easily.
