@@ -20,3 +20,11 @@ From a development perspective, this project is an excellent opportunity to:
 - Build a full-stack application.  
 - Learn more about integrating React with MongoDB.  
 - Create a practical and impactful tool for everyday use.
+
+
+ Deploying Your ASAP App on Render
+Steps to Deploy:
+Login to Render.com using your Kalvium community Google account.
+Create a new web service and connect it to your GitHub repository.
+Configure the deployment settings (build commands, environment variables, etc.).
+Deploy your app and wait for Render to complete the process.
