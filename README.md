@@ -22,4 +22,4 @@ From a development perspective, this project is an excellent opportunity to:
 - Create a practical and impactful tool for everyday use.
 
 
-In the assignment of render deployment I have learnt how to use the website render.com to deploy the project it was easy and simple and can be learnt easily.
+
