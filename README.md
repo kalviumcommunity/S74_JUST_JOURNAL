@@ -23,3 +23,8 @@ From a development perspective, this project is an excellent opportunity to:
 
 
 In the assignment of render deployment I have learnt how to use the website render.com to deploy the project it was easy and simple and can be learnt easily.
+
+
+Milestone 1
+
+Created required files and installed required packages as per mind map that I have created like mongoose, express, dotenv, react, .gitignore, routes and components
