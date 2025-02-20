@@ -1,20 +1,26 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-// MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.error('MongoDB Connection Error:', err));
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-// Home Route with DB Status
-app.get('/', (req, res) => {
-  const dbStatus = mongoose.connection.readyState === 1 ? 'Connected' : 'Not Connected';
-  res.json({ message: 'Welcome to the API', database: dbStatus });
+// Import routes
+const journalRoutes = require("./routes/journalroutes");
+app.use("/api/journals", journalRoutes); // API endpoint for journals
+
+// Root route (optional)
+app.get("/", (req, res) => {
+    res.send("Welcome to the Journaling App API");
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start server
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+});
