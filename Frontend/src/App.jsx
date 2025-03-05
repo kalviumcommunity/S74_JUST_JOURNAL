@@ -1,35 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import React from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const LandingPage = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-6">
+      <h1 className="text-4xl font-bold text-blue-600 mb-4">Welcome to Just Journal</h1>
+      <p className="text-lg text-gray-700 mb-6 text-center max-w-md">
+        Capture your thoughts, ideas, and daily experiences. Write your journal entries with a 300-word limit.
       </p>
-    </>
-  )
-}
+      <div className="space-x-4">
+        <button className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">
+          Get Started
+        </button>
+        <button className="bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-400">
+          Learn More
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default App
+export default LandingPage;
