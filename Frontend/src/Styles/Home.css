@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 3rem; /* Increased size */
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+  
+  .instruction {
+    background-color: #ffffff;
+    padding: 30px; /* Increased padding */
+    margin: 20px auto;
+    width: 60%; /* Wider */
+    border-radius: 15px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .instruction p {
+    font-size: 1.6rem; /* Much bigger text */
+    font-weight: bold;
+    color: #444;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
+  .journal {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 60%;
+    margin: 20px auto;
+    border-radius: 15px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  label {
+    font-size: 1.4rem; /* Bigger label */
+    font-weight: bold;
+    color: #222;
+  }
+  
+  input[type="date"] {
+    width: 95%;
+    padding: 15px;
+    margin-top: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  
+  textarea {
+    width: 95%;
+    height: 200px; /* Much bigger */
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    resize: none; /* No resizing */
+    line-height: 1.5;
+  }
+  
+  p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  @media (max-width: 768px) {
+    .instruction, .journal {
+      width: 80%;
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+    }
+  
+    .instruction p {
+      font-size: 1.4rem;
+    }
+  
+    label {
+      font-size: 1.3rem;
+    }
+  
+    input, textarea {
+      font-size: 1.2rem;
+    }
+  }
