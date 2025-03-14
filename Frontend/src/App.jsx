@@ -1,6 +1,6 @@
 import React from 'react'
-import Login from './Auth/Login'
-import Signup from './Auth/Signup'
+import Login from '../src/Pages/Login'
+import Signup from '../src/Pages/Signup'
 import Home from './Pages/Home'
 
 const App = () => {

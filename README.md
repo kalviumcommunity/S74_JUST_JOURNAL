@@ -23,4 +23,4 @@ From a development perspective, this project is an excellent opportunity to:
 
 
 
-Deploy Link: https://charming-lolly-a59258.netlify.app/
+Frontend Deploy Link: https://charming-lolly-a59258.netlify.app/
