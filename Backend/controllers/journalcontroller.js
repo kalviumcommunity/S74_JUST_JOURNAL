@@ -1,6 +1,6 @@
 // controllers/journalController.js
 
-import Journal from '../models/journal';
+import Journal from '../model/journal';
 
 // ➕ Create Journal Entry
 export const createJournal = async (req, res) => {
