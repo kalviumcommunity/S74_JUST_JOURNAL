@@ -7,7 +7,7 @@ const JournalInfo = () => {
     const [journals, setJournals] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/")
+        axios.get("http://localhost:3001/journals")
             .then(response => setJournals(response.data))
             .catch(error => console.error("Error fetching journals:", error));
     }, []);
@@ -15,15 +15,25 @@ const JournalInfo = () => {
     const handleDelete = async (id) => {
         try {
             await axios.delete(`http://localhost:3001/journals/${id}`);
-            setJournals(journals.filter(journal => journal._id !== id));
+            setJournals(prevJournals => prevJournals.filter(journal => journal._id !== id));
         } catch (error) {
-            console.error("Error deleting journal:", error);
+            console.error("Error deleting journal:", error.response?.data || error.message);
         }
     };
 
     return (
         <div>
-            <h2>JOURNAL INFO</h2>
+            <div className="header">
+                <h2>JOURNAL INFO</h2>
+                <div className="auth-buttons">
+                    <Link to="/signup">
+                        <button className="signup-btn">Signup</button>
+                    </Link>
+                    <Link to="/login">
+                        <button className="login-btn">Login</button>
+                    </Link>
+                </div>
+            </div>
             <br />
             <button><Link to="/create">Add Journal +</Link></button>
             <div>
@@ -37,8 +47,8 @@ const JournalInfo = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {journals.map((journal, index) => (
-                            <tr key={index}>
+                        {journals.map((journal) => (
+                            <tr key={journal._id}>
                                 <td>{journal.date}</td>
                                 <td>{journal.title}</td>
                                 <td>{journal.content}</td>

@@ -1,100 +1,101 @@
-/* General Styling */
+/* Dark Theme Background */
 body {
-    font-family: 'Poppins', sans-serif;
     background-color: #0d1117;
-    margin: 0;
-    padding: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
     color: #e4e4e4;
+    font-family: Arial, sans-serif;
 }
 
 /* Container */
 .container {
-    width: 90%;
-    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-/* Heading */
-h2 {
-    color: #8b93ff;
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
+/* Header with Flexbox */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
 }
 
-/* Button */
-button {
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.signup-btn, .login-btn {
     background: linear-gradient(135deg, #8b93ff, #4b61ff);
     color: white;
     border: none;
-    padding: 10px 18px;
+    padding: 12px 18px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
-    transition: 0.3s ease-in-out;
-    display: inline-block;
-    margin-bottom: 20px;
+    font-size: 16px;
+    transition: 0.3s;
 }
 
-button:hover {
+.signup-btn:hover, .login-btn:hover {
     background: linear-gradient(135deg, #6a72ff, #3847d1);
     transform: scale(1.05);
 }
 
-/* Link inside Button */
-button a {
-    text-decoration: none;
-    color: white;
-}
-
-/* Table */
+/* Journal Table */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: transparent;
+    margin-top: 20px;
+    background: #161b22;
     color: #e4e4e4;
 }
 
-/* Table Head */
-th {
-    background: #282c34;
-    color: #8b93ff;
-    padding: 12px;
+th, td {
+    border: 2px solid #444;
+    padding: 10px;
     text-align: left;
 }
 
-/* Table Data */
-td {
-    padding: 12px;
-    border-bottom: 1px solid #444;
+th {
+    background: #22272e;
+    font-size: 18px;
 }
 
-/* Last Row Border */
-tr:last-child td {
-    border-bottom: none;
-}
-
-/* Action Buttons */
-td button {
-    margin-right: 10px;
-    background: #34d399;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 12px;
+/* Buttons */
+button {
+    background: linear-gradient(135deg, #8b93ff, #4b61ff);
     color: white;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #6a72ff, #3847d1);
+    transform: scale(1.08);
+}
+
+/* Input Fields */
+input, textarea {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    background: #161b22;
+    border: 2px solid #444;
+    border-radius: 8px;
+    color: #e4e4e4;
+    outline: none;
     transition: 0.3s;
 }
 
-td button:nth-child(2) {
-    background: #ef4444;
-}
-
-td button:hover {
-    opacity: 0.8;
-    transform: scale(1.05);
+input:focus, textarea:focus {
+    border-color: #8b93ff;
+    box-shadow: 0px 0px 8px rgba(139, 147, 255, 0.5);
 }
