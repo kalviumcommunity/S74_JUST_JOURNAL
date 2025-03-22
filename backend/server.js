@@ -1,100 +1,128 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const cors = require('cors');
-const Journalmodel = require("./Model/Journalmodel");
 
 const app = express();
-const port = 3001;
-
-// Middleware
-app.use(express.json()); // Allows JSON body parsing
 app.use(cors());
+app.use(express.json());
 
-// MongoDB Connection
-mongoose.connect("mongodb+srv://shashankvenkatesh7906:hello@journals.wkchh.mongodb.net/?retryWrites=true&w=majority&appName=journals")
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log("DB connection Error:", err));
+// ✅ MongoDB Connection (No dotenv)
+mongoose.connect(`mongodb+srv://shashankvenkatesh7906:hello@journals.wkchh.mongodb.net/?retryWrites=true&w=majority&appName=journals`)
+.then(() => console.log("✅ MongoDB connected successfully"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
 
-// Routes
+// ✅ User Schema
+const UserSchema = new mongoose.Schema({
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true }
+});
 
-// Get all journals
-app.get('/', async (req, res) => {
+const UserModel = mongoose.model('User', UserSchema);
+
+// ✅ Journal Schema
+const JournalSchema = new mongoose.Schema({
+    date: { type: String, required: true },
+    title: { type: String, required: true },
+    content: { type: String, required: true }
+});
+
+const JournalModel = mongoose.model('Journal', JournalSchema);
+
+// ✅ Signup Route (Hashing Password)
+app.post('/signup', async (req, res) => {
     try {
-        const journals = await Journalmodel.find({});
-        res.status(200).json(journals);
+        const { email, password } = req.body;
+
+        // ✅ Validate input
+        if (!email || !password) {
+            return res.status(400).json({ error: "Email and password are required" });
+        }
+
+        // ✅ Check if user already exists
+        const existingUser = await UserModel.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ error: "User already exists" });
+        }
+
+        // ✅ Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // ✅ Save user
+        const newUser = new UserModel({ email, password: hashedPassword });
+        await newUser.save();
+
+        return res.json({ message: "Signup successful" });
+
     } catch (err) {
-        res.status(500).json({ error: "Error fetching journals", details: err.message });
+        console.error("Signup error:", err);  // Log error
+        return res.status(500).json({ error: "Internal server error" });
     }
 });
 
-// Create a new journal
+
+
+// ✅ Login Route (Check Hashed Password)
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await UserModel.findOne({ email });
+
+        if (!user) return res.status(400).json({ error: "User not found" });
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(400).json({ error: "Invalid password" });
+
+        res.json({ message: "Login successful" });
+    } catch (err) {
+        res.status(500).json({ error: "Error logging in" });
+    }
+});
+
+// ✅ Create Journal
 app.post('/createjournal', async (req, res) => {
     try {
         const { date, title, content } = req.body;
-        const newJournal = await Journalmodel.create({ date, title, content });
-        res.status(201).json(newJournal);
+        const newJournal = new JournalModel({ date, title, content });
+        await newJournal.save();
+        res.json({ message: "Journal added successfully" });
     } catch (err) {
-        res.status(500).json({ error: "Error creating journal", details: err.message });
+        res.status(500).json({ error: "Error adding journal" });
     }
 });
 
-app.get('/journals/:id', async (req, res) => {
+// ✅ Get All Journals
+app.get('/journals', async (req, res) => {
     try {
-        const { id } = req.params;
-        const journal = await Journalmodel.findById(id);
-
-        if (!journal) {
-            return res.status(404).json({ error: "Journal not found" });
-        }
-
-        res.status(200).json(journal);
+        const journals = await JournalModel.find();
+        res.json(journals);
     } catch (err) {
-        res.status(500).json({ error: "Error fetching journal", details: err.message });
+        res.status(500).json({ error: "Error fetching journals" });
     }
 });
 
-
-// Update a journal by ID
-app.put('/update/:id', async (req, res) => {
+// ✅ Update Journal
+app.put('/updatejournal/:id', async (req, res) => {
     try {
-        const { id } = req.params;
         const { date, title, content } = req.body;
-
-        const updatedJournal = await Journalmodel.findByIdAndUpdate(
-            id,
-            { date, title, content },
-            { new: true } // Return the updated document
-        );
-
-        if (!updatedJournal) {
-            return res.status(404).json({ error: "Journal not found" });
-        }
-
-        res.status(200).json(updatedJournal);
-        console.log('weeeee')
+        await JournalModel.findByIdAndUpdate(req.params.id, { date, title, content });
+        res.json({ message: "Journal updated successfully" });
     } catch (err) {
-        res.status(500).json({ error: "Error updating journal", details: err.message });
+        res.status(500).json({ error: "Error updating journal" });
     }
 });
 
-
+// ✅ Delete Journal
 app.delete('/journals/:id', async (req, res) => {
     try {
-        const { id } = req.params;
-
-        const deletedJournal = await Journalmodel.findByIdAndDelete(id);
-
-        if (!deletedJournal) {
-            return res.status(404).json({ error: "Journal not found" });
-        }
-
-        res.status(200).json({ message: "Journal deleted successfully" });
+        await JournalModel.findByIdAndDelete(req.params.id);
+        res.json({ message: "Journal deleted successfully" });
     } catch (err) {
-        res.status(500).json({ error: "Error deleting journal", details: err.message });
+        res.status(500).json({ error: "Error deleting journal" });
     }
 });
 
-// Start Server
-app.listen(port, () => {
-    console.log(`Server running @ port ${port}`);
+const PORT = 3001;
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
 });
